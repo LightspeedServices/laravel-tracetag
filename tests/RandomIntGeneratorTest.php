@@ -13,7 +13,7 @@ class RandomIntTraceTagGeneratorTest extends TestCase
 
         $traceTag = $generator->generate();
 
-        $this->assertRegExp('/^[0-9]+$/', $traceTag);
+        $this->assertMatchesRegularExpression('/^[0-9]+$/', $traceTag);
     }
 
     /** @test */
