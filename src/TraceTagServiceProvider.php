@@ -45,7 +45,6 @@ class TraceTagServiceProvider extends ServiceProvider
     /**
      * Check against the app version to determine whether or not the app is Laravel or Lumen.
      *
-     * @return bool
      */
     private function isLumenApp(): bool
     {
