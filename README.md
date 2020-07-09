@@ -1,5 +1,4 @@
 # Laravel TraceTag
-[![Build Status](https://travis-ci.org/bonsi/laravel-tracetag.svg?branch=master)](https://travis-ci.org/bonsi/laravel-tracetag)
 ---
 
 Generate an unique tag or identifier (aka TraceTag) for an application request to be tracked through your application.
@@ -11,6 +10,10 @@ A monolog processor to add the TraceTag to your logs is included out of the box.
 Mind you, this is still very much a work in progress!
 
 Only tested with Laravel 5.4 currently.
+
+### Fork
+
+This repo is a fork of bonsi/laravel-tracetag
 
 ### Use cases
 

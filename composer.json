@@ -1,9 +1,9 @@
 {
-    "name": "bonsi/laravel-tracetag",
-    "description": "Trace a request through your application using a tag",
+    "name": "lightspeed/laravel-tracetag",
+    "description": "Trace a request through your application using a tag. Forked from bonsi/laravel-tracetag",
     "type": "library",
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "ramsey/uuid": "^3.6"
     },
     "autoload": {
@@ -19,9 +19,7 @@
         }
     ],
     "require-dev": {
-        "phpunit/phpunit": "^6.2",
-        "mockery/mockery": "^0.9.9",
-        "orchestra/testbench": "~3.0"
+        "orchestra/testbench": "~4.0"
     },
     "scripts": {
         "test": "vendor/bin/phpunit -c phpunit.xml.dist --debug"

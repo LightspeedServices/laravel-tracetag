@@ -44,7 +44,7 @@ class TraceTagTest extends TestCase
         $this->assertEquals($newTag, $traceTag->tag());
     }
 
-    protected function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 

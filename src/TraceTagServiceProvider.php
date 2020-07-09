@@ -3,10 +3,9 @@
 namespace Bonsi\TraceTag;
 
 use Illuminate\Container\Container;
+use Illuminate\Foundation\Http\Kernel;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Contracts\Http\Kernel;
 use \Illuminate\Support\ServiceProvider;
-use Bonsi\TraceTag\Generators\Uuid4Generator;
 use Bonsi\TraceTag\Generators\RandomIntGenerator;
 use Bonsi\TraceTag\Middleware\TraceTagMiddleware;
 
@@ -29,10 +28,27 @@ class TraceTagServiceProvider extends ServiceProvider
         $this->publishes([$source => config_path('trace-tag.php')]);
         $this->mergeConfigFrom($source, 'trace-tag');
 
-        if($this->app->config->get('trace-tag.middleware.enabled', false))
+        if (config('trace-tag.middleware.enabled', false))
         {
-            $this->registerMiddleware(TraceTagMiddleware::class);
+            if ($this->isLumenApp())
+            {
+                Log::warning('TraceTagMiddleware middleware needs to be registered in app.php for an Lumen app');
+            }
+            else
+            {
+                $kernel = $this->app[Kernel::class];
+                $kernel->pushMiddleware(TraceTagMiddleware::class);
+            }
         }
+    }
+
+    /**
+     * Check against the app version to determine whether or not the app is Laravel or Lumen.
+     *
+     */
+    private function isLumenApp(): bool
+    {
+        return stripos(strtolower($this->app->version()), 'lumen') !== false;
     }
 
     /**
@@ -42,7 +58,7 @@ class TraceTagServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Log::getMonolog()->pushProcessor(new \Bonsi\TraceTag\Integrations\MonologProcessor);
+        Log::getLogger()->pushProcessor(new \Bonsi\TraceTag\Integrations\MonologProcessor);
 
         $this->app->singleton('tracetag', function(Container $app) {
             $generatorClass = $app->config->get('tracetag.generator', RandomIntGenerator::class);
@@ -50,19 +66,6 @@ class TraceTagServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('tracetag', TraceTag::class);
-    }
-
-    /**
-     * Register the TraceTag middleware.
-     *
-     * @param $middleware
-     */
-    public function registerMiddleware( $middleware )
-    {
-        $kernel = $this->app[Kernel::class];
-
-//        $kernel->prependMiddleware($middleware);
-        $kernel->pushMiddleware($middleware);
     }
 
 }

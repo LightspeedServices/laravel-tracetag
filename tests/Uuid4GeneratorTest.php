@@ -13,7 +13,7 @@ class Uuid4GeneratorTest extends TestCase
 
         $traceTag = $generator->generate();
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i',
             $traceTag,
             'Invalid UUID version 4 string format.'

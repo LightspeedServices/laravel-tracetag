@@ -20,7 +20,7 @@ class MonologProcessor
      */
     public function __invoke(array $record) : array
     {
-        $record['extra']['TraceTag'] = $this->getTraceTag();
+        $record['context'] = array_merge($record['context'], ['TraceTag' => $this->getTraceTag()]);
         return $record;
     }
 

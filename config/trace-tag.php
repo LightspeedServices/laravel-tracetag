@@ -18,6 +18,10 @@ return [
     | The middleware used for getting & setting TraceTags.
     */
     'middleware' => [
+        /*
+         | For a Lumen App this value has no effect.
+         | Set the value to false and register the middleware in app.php
+         */
         'enabled' => false,
         /*
         |
