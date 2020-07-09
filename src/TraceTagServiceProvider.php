@@ -30,7 +30,7 @@ class TraceTagServiceProvider extends ServiceProvider
 
         if (config('trace-tag.middleware.enabled', false))
         {
-            if($this->isLumenApp())
+            if ($this->isLumenApp())
             {
                 Log::warning(sprintf('%s middleware needs to be registered in app.php for an Lumen app'));
             }
