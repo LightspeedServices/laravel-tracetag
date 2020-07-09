@@ -28,7 +28,7 @@ class TraceTagServiceProvider extends ServiceProvider
         $this->publishes([$source => config_path('trace-tag.php')]);
         $this->mergeConfigFrom($source, 'trace-tag');
 
-        if(config('trace-tag.middleware.enabled', false))
+        if (config('trace-tag.middleware.enabled', false))
         {
             if($this->isLumenApp())
             {
