@@ -3,8 +3,8 @@
     "description": "Trace a request through your application using a tag. Forked from bonsi/laravel-tracetag",
     "type": "library",
     "require": {
-        "php": ">=7.1",
-        "ramsey/uuid": "^3.6"
+        "php": ">=7.2",
+        "ramsey/uuid": "^3.7|^4.0"
     },
     "autoload": {
         "psr-4": {
